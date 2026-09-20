@@ -1,0 +1,50 @@
+[
+  {
+    "id": "rev-1",
+    "name": "Tariq Al-Mansoor",
+    "rating": 5,
+    "product_id": "halwa-03",
+    "product_name": "Sultan Royal Omani Black Halwa",
+    "title": "Authentic taste of Nizwa and Muscat!",
+    "comment": "The aroma of pure rosewater, rich ghee, and fresh cardamom took me straight back to Oman. The texture is sublime and the cashews are incredibly fresh. 10/10!",
+    "date": "2026-09-15",
+    "verified": true,
+    "city": "London / Dubai"
+  },
+  {
+    "id": "rev-2",
+    "name": "Pooja Sharma",
+    "rating": 5,
+    "product_id": "halwa-01",
+    "product_name": "Shahi Gajar Ka Halwa",
+    "title": "Tastes just like grandmother's winter kitchen",
+    "comment": "You can truly taste the pure Gir cow desi ghee and fresh khoya. Not overly sweet, perfectly balanced, and the silver vark on top makes it look fit for royalty.",
+    "date": "2026-09-14",
+    "verified": true,
+    "city": "Birmingham"
+  },
+  {
+    "id": "rev-3",
+    "name": "Zayn & Aaliyah Malik",
+    "rating": 5,
+    "product_id": "halwa-06",
+    "product_name": "Imperial 4-Compartment Assorted Halwa Hamper",
+    "title": "The most stunning wedding gift box ever",
+    "comment": "Ordered 15 boxes for our family gathering. The velvet green packaging with gold ribbon is pure luxury. Everyone was raving about the Karachi jewels and Moong Dal halwa!",
+    "date": "2026-09-12",
+    "verified": true,
+    "city": "Manchester"
+  },
+  {
+    "id": "rev-4",
+    "name": "Dr. Sameer Siddiqui",
+    "rating": 5,
+    "product_id": "halwa-04",
+    "product_name": "Zaika Moong Dal Shahi Halwa",
+    "title": "Melt-in-the-mouth perfection",
+    "comment": "Proper slow-roasted moong dal halwa is an art form. Zaika nailed the consistency, aroma, and generous slivered pistachios. Arrived warm and fresh!",
+    "date": "2026-09-10",
+    "verified": true,
+    "city": "Leeds"
+  }
+]

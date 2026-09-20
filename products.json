@@ -1,0 +1,126 @@
+[
+  {
+    "id": "halwa-dates",
+    "name": "Dates Halwa - Authentic, Kerala Halwa",
+    "slug": "dates-halwa",
+    "category": "single",
+    "category_name": "Single Varieties",
+    "discount_badge": "55.06% OFF",
+    "badge_type": "Sale",
+    "is_sold_out": false,
+    "rating": 5.0,
+    "review_count": 3,
+    "original_price": 599.00,
+    "base_price": 299.00,
+    "image": "assets/images/gajar_halwa.jpg",
+    "short_desc": "Handcrafted authentic dates halwa slow-cooked with pure coconut oil, cashew nuts, and natural dates sweetness.",
+    "weights": [
+      { "size": "200 g", "price": 299.00, "orig_price": 599.00 },
+      { "size": "500 g", "price": 549.00, "orig_price": 999.00 },
+      { "size": "1 kg", "price": 999.00, "orig_price": 1899.00 }
+    ]
+  },
+  {
+    "id": "halwa-black",
+    "name": "Black Halwa - Authentic, Kerala Halwa",
+    "slug": "black-halwa",
+    "category": "single",
+    "category_name": "Single Varieties",
+    "discount_badge": "50.06% OFF",
+    "badge_type": "Sale",
+    "is_sold_out": false,
+    "rating": 5.0,
+    "review_count": 19,
+    "original_price": 499.00,
+    "base_price": 299.00,
+    "image": "assets/images/omani_halwa.jpg",
+    "short_desc": "Traditional Kozhikode black halwa slow-caramelized in jaggery and coconut oil, studded with crunchy cashews.",
+    "weights": [
+      { "size": "200 g", "price": 299.00, "orig_price": 499.00 },
+      { "size": "500 g", "price": 499.00, "orig_price": 899.00 },
+      { "size": "1 kg", "price": 899.00, "orig_price": 1599.00 }
+    ]
+  },
+  {
+    "id": "halwa-jackfruit",
+    "name": "Jackfruit Halwa - Authentic, Kerala Halwa",
+    "slug": "jackfruit-halwa",
+    "category": "fruit",
+    "category_name": "Fruit Halwa",
+    "discount_badge": "50.07% OFF",
+    "badge_type": "Sale",
+    "is_sold_out": false,
+    "rating": 5.0,
+    "review_count": 50,
+    "original_price": 699.00,
+    "base_price": 349.00,
+    "image": "assets/images/sooji_halwa.jpg",
+    "short_desc": "Rich Chakka Varatti halwa made from sweet ripe Kerala jackfruit pulp and pure ghee.",
+    "weights": [
+      { "size": "200 g", "price": 349.00, "orig_price": 699.00 },
+      { "size": "500 g", "price": 599.00, "orig_price": 1199.00 },
+      { "size": "1 kg", "price": 1099.00, "orig_price": 1999.00 }
+    ]
+  },
+  {
+    "id": "halwa-fruit-nut",
+    "name": "Fruit And Nut Halwa - Authentic, Kerala Halwa",
+    "slug": "fruit-nut-halwa",
+    "category": "fruit",
+    "category_name": "Fruit Halwa",
+    "discount_badge": "50.07% OFF",
+    "badge_type": "Sale",
+    "is_sold_out": false,
+    "rating": 5.0,
+    "review_count": 7,
+    "original_price": 699.00,
+    "base_price": 349.00,
+    "image": "assets/images/karachi_halwa.jpg",
+    "short_desc": "Vibrant ruby confection packed with dried fruits, almonds, pistachios, cashews, and natural fruit extracts.",
+    "weights": [
+      { "size": "200 g", "price": 349.00, "orig_price": 699.00 },
+      { "size": "500 g", "price": 599.00, "orig_price": 1199.00 },
+      { "size": "1 kg", "price": 1099.00, "orig_price": 1999.00 }
+    ]
+  },
+  {
+    "id": "halwa-tender-coconut",
+    "name": "Tender Coconut Halwa - Authentic, Kerala Halwa",
+    "slug": "tender-coconut-halwa",
+    "category": "fruit",
+    "category_name": "Fruit Halwa",
+    "discount_badge": "45.00% OFF",
+    "badge_type": "Sale",
+    "is_sold_out": false,
+    "rating": 5.0,
+    "review_count": 14,
+    "original_price": 599.00,
+    "base_price": 329.00,
+    "image": "assets/images/moong_halwa.jpg",
+    "short_desc": "Delicate tender coconut (elaneer) flesh simmered with milk, cardamom, and roasted cashews.",
+    "weights": [
+      { "size": "200 g", "price": 329.00, "orig_price": 599.00 },
+      { "size": "500 g", "price": 579.00, "orig_price": 999.00 }
+    ]
+  },
+  {
+    "id": "halwa-heritage-box",
+    "name": "5 Premium Varieties of Authentic Halwa",
+    "slug": "heritage-box",
+    "category": "combo",
+    "category_name": "Halwa Combo",
+    "discount_badge": "56.29% OFF",
+    "badge_type": "Sale",
+    "is_sold_out": false,
+    "rating": 5.0,
+    "review_count": 6,
+    "original_price": 1599.00,
+    "base_price": 699.00,
+    "image": "assets/images/gift_box.jpg",
+    "short_desc": "Signature royal heritage box with 5 snack-sized packs: Dates, Black, Jackfruit, Fruit & Nut, and Coconut Halwas.",
+    "weights": [
+      { "size": "700 g", "price": 699.00, "orig_price": 1599.00, "popular": true },
+      { "size": "1.2 kg", "price": 1199.00, "orig_price": 2499.00 }
+    ]
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "order_id": "ZSH-8842",
+    "customer": {
+      "name": "Hamza Farooqi",
+      "phone": "+44 7700 900123",
+      "email": "hamza.f@example.com",
+      "address": "42 Kensington Palace Gardens, Apt 4B",
+      "city": "London",
+      "postal_code": "W8 4QP"
+    },
+    "items": [
+      {
+        "id": "halwa-01",
+        "name": "Shahi Gajar Ka Halwa",
+        "size": "500g",
+        "unit_price": 17.50,
+        "quantity": 2,
+        "sweetness": "Authentic Traditional",
+        "addons": ["Extra Roasted Pistachios & Cashews (50g)"],
+        "total": 40.00
+      },
+      {
+        "id": "halwa-03",
+        "name": "Sultan Royal Omani Black Halwa",
+        "size": "500g",
+        "unit_price": 22.00,
+        "quantity": 1,
+        "sweetness": "Authentic Muscat Sweetness",
+        "addons": ["Arabic Cardamom Gahwa Coffee Blend (100g)"],
+        "total": 26.50
+      }
+    ],
+    "order_type": "delivery",
+    "delivery_slot": "Today, 6:00 PM - 8:00 PM (Fresh Warm)",
+    "payment_method": "Cash on Delivery",
+    "payment_status": "Pending",
+    "subtotal": 66.50,
+    "discount": 9.98,
+    "coupon_code": "HALWA15",
+    "delivery_fee": 0.00,
+    "total": 56.52,
+    "notes": "Please ring door buzzer twice and include extra silver vark if possible.",
+    "status": "cooking",
+    "status_history": [
+      {"status": "received", "time": "2026-09-18 21:15", "note": "Order confirmed and sent to Master Halwai"},
+      {"status": "cooking", "time": "2026-09-18 21:30", "note": "Simmering in fresh A2 Desi Cow Ghee in copper cauldron"}
+    ],
+    "created_at": "2026-09-18 21:15:00"
+  },
+  {
+    "order_id": "ZSH-7391",
+    "customer": {
+      "name": "Fatima Zahra",
+      "phone": "+44 7700 900555",
+      "email": "fatima.z@example.com",
+      "address": "15 Royal Crescent",
+      "city": "Bath",
+      "postal_code": "BA1 2LR"
+    },
+    "items": [
+      {
+        "id": "halwa-06",
+        "name": "Imperial 4-Compartment Assorted Halwa Hamper",
+        "size": "1kg",
+        "unit_price": 38.00,
+        "quantity": 1,
+        "sweetness": "Chef's Curated Sweetness",
+        "addons": ["Gold Embossed Custom Message Card"],
+        "total": 38.00
+      }
+    ],
+    "order_type": "delivery",
+    "delivery_slot": "Tomorrow Morning (10:00 AM - 1:00 PM)",
+    "payment_method": "Card / Online Pay",
+    "payment_status": "Paid",
+    "subtotal": 38.00,
+    "discount": 0.00,
+    "coupon_code": "",
+    "delivery_fee": 4.50,
+    "total": 42.50,
+    "notes": "Gift for Eid celebration. Please write 'Happy Eid to Uncle & Auntie' on card.",
+    "status": "out_for_delivery",
+    "status_history": [
+      {"status": "received", "time": "2026-09-18 18:00", "note": "Order confirmed"},
+      {"status": "cooking", "time": "2026-09-18 19:00", "note": "Artisanal halwas prepared fresh"},
+      {"status": "packed", "time": "2026-09-18 20:00", "note": "Sealed in Royal Velvet Keepsake Box with Satin Ribbon"},
+      {"status": "out_for_delivery", "time": "2026-09-18 21:45", "note": "Dispatched with thermal ghee-safe courier"}
+    ],
+    "created_at": "2026-09-18 18:00:00"
+  }
+]

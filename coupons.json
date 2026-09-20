@@ -1,0 +1,26 @@
+[
+  {
+    "code": "HALWA10",
+    "discount_type": "percentage",
+    "value": 10,
+    "description": "10% OFF on all authentic halwas",
+    "min_order": 499.00,
+    "active": true
+  },
+  {
+    "code": "FREESHIP",
+    "discount_type": "free_shipping",
+    "value": 50.00,
+    "description": "Free Standard Courier Delivery",
+    "min_order": 499.00,
+    "active": true
+  },
+  {
+    "code": "HERITAGE100",
+    "discount_type": "fixed",
+    "value": 100.00,
+    "description": "Rs. 100 OFF on orders above Rs. 999",
+    "min_order": 999.00,
+    "active": true
+  }
+]

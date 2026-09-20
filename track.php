@@ -1,0 +1,99 @@
+<?php
+/**
+ * Zaika Shahi — Order Tracking (PHP)
+ */
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Tracking — Zaika Shahi Confectionery</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏺</text></svg>">
+</head>
+<body>
+
+  <!-- Top Banner -->
+  <div class="top-banner">
+    <div class="container top-banner-inner">
+      <div>
+        <span>Kitchen Dispatch Service • Live Tracking</span>
+      </div>
+      <div class="banner-links">
+        <a href="index.php" style="color: #FFF; text-decoration: underline;">← Return to Store</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-row">
+      <a href="index.php" class="brand">
+        <div class="brand-monogram">Z</div>
+        <div class="brand-text">
+          <span class="brand-title">ZAIKA SHAHI</span>
+          <span class="brand-subtitle">Order Status Portal</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.php" class="nav-item">Storefront</a>
+        <a href="index.php#menu" class="nav-item">Confections</a>
+        <a href="track.php" class="nav-item active">Order Tracking</a>
+        <a href="admin.php" class="nav-item">Kitchen Console</a>
+      </nav>
+
+      <div class="header-utilities">
+        <a href="index.php#menu" class="btn-cta-primary" style="padding: 8px 18px; font-size: 0.8125rem;">
+          Order More
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Tracking Container -->
+  <main class="container" style="max-width: 760px; padding: 50px 20px 80px;">
+    <div class="section-header" style="margin-bottom: 28px;">
+      <span class="section-label">Order Dispatch</span>
+      <h1 class="section-h2">Track Your Confection Order</h1>
+      <p class="section-sub">Enter your Order Reference Number (e.g. ZSH-8842) to view live preparation status.</p>
+    </div>
+
+    <!-- Lookup Form -->
+    <div class="filter-bar" style="margin-bottom: 24px;">
+      <form onsubmit="event.preventDefault(); window.halwaApp.performTrackLookup(document.getElementById('tracker-search-input').value.trim());" style="display: flex; gap: 10px; width: 100%; flex-wrap: wrap;">
+        <div class="search-field" style="flex: 1; min-width: 260px;">
+          <input type="text" id="tracker-search-input" placeholder="Enter Order ID (e.g. ZSH-8842)..." required>
+        </div>
+        <button type="submit" class="btn-cta-primary" style="padding: 10px 24px; font-size: 0.875rem;">
+          Track Order
+        </button>
+      </form>
+
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 0.8125rem; color: var(--color-text-muted); margin-top: 6px;">
+        <span>Sample Orders:</span>
+        <button type="button" class="badge-subtle" style="cursor: pointer;" onclick="document.getElementById('tracker-search-input').value='ZSH-8842'; window.halwaApp.performTrackLookup('ZSH-8842');">
+          ZSH-8842 (Cooking)
+        </button>
+        <button type="button" class="badge-subtle" style="cursor: pointer;" onclick="document.getElementById('tracker-search-input').value='ZSH-7391'; window.halwaApp.performTrackLookup('ZSH-7391');">
+          ZSH-7391 (Out for Delivery)
+        </button>
+      </div>
+    </div>
+
+    <!-- Live Status Display Box -->
+    <div id="live-tracker-view"></div>
+  </main>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const q = urlParams.get('order_id') || 'ZSH-8842';
+      document.getElementById('tracker-search-input').value = q;
+      window.halwaApp.performTrackLookup(q);
+    });
+  </script>
+</body>
+</html>

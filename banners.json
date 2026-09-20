@@ -1,0 +1,44 @@
+[
+  {
+    "id": "banner-festive-sale",
+    "tag": "🔥 55.06% OFF • FESTIVE SALE",
+    "title": "Authentic Kozhikode",
+    "highlight": "Kerala Halwa",
+    "subtext": "Slow-simmered in pure coconut oil, natural dates, and rich jaggery, loaded with whole roasted cashews.",
+    "cta_text": "Shop Dates & Black Halwa",
+    "cta_link": "#single-varieties",
+    "image": "assets/images/omani_halwa.jpg",
+    "theme_color": "#FFA000",
+    "bg_style": "linear-gradient(135deg, #FFFDF9 0%, #FFF8EE 100%)",
+    "active": true,
+    "order": 1
+  },
+  {
+    "id": "banner-heritage-box",
+    "tag": "🎁 56.29% OFF • GIFT SPECIAL",
+    "title": "5 Premium Varieties",
+    "highlight": "Heritage Gift Box",
+    "subtext": "5 snack-sized snack packs in a royal purple keepsake gift box. The ultimate celebration treat for family & friends.",
+    "cta_text": "Order Heritage Box (Rs. 699)",
+    "cta_link": "#heritage-spotlight",
+    "image": "assets/images/gift_box.jpg",
+    "theme_color": "#7C3AED",
+    "bg_style": "linear-gradient(135deg, #FBF8FF 0%, #F5EEFD 100%)",
+    "active": true,
+    "order": 2
+  },
+  {
+    "id": "banner-fruit-halwa",
+    "tag": "🌿 100% PURE INGREDIENTS",
+    "title": "Jackfruit & Tender",
+    "highlight": "Coconut Halwas",
+    "subtext": "Fresh seasonal Chakka Varatti & Elaneer halwas crafted with time-tested heritage recipes since 1990.",
+    "cta_text": "Explore Fruit Halwas",
+    "cta_link": "#single-varieties",
+    "image": "assets/images/sooji_halwa.jpg",
+    "theme_color": "#059669",
+    "bg_style": "linear-gradient(135deg, #F6FFF9 0%, #EEFBF3 100%)",
+    "active": true,
+    "order": 3
+  }
+]

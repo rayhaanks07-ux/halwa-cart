@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Operations & Catalog Console — Halwa Haweli</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍯</text></svg>">
+  <style>
+    :root {
+      --admin-bg: #F8FAFC;
+      --admin-card: #FFFFFF;
+      --admin-border: #E2E8F0;
+      --admin-text-main: #0F172A;
+      --admin-text-muted: #64748B;
+      --admin-brand: #FFA000;
+      --admin-brand-hover: #F59E0B;
+    }
+
+    body {
+      background-color: var(--admin-bg);
+      color: var(--admin-text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .admin-header {
+      background: #111827;
+      color: #FFFFFF;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #FFFFFF;
+    }
+
+    .admin-brand-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--admin-brand);
+      color: #FFFFFF;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .admin-nav-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .admin-tab-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      background: transparent;
+      color: #94A3B8;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .admin-tab-btn:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .admin-tab-btn.active {
+      color: #FFFFFF;
+      background: var(--admin-brand);
+    }
+
+    .admin-main-wrap {
+      max-width: 1200px;
+      margin: 32px auto 80px;
+      padding: 0 20px;
+    }
+
+    .admin-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .admin-section-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #111827;
+      margin: 0 0 4px;
+    }
+
+    .admin-section-desc {
+      font-size: 14px;
+      color: var(--admin-text-muted);
+      margin: 0;
+    }
+
+    .btn-admin-primary {
+      background: var(--admin-brand);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-admin-primary:hover {
+      background: var(--admin-brand-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-admin-secondary {
+      background: #FFFFFF;
+      color: #334155;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--admin-border);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-admin-secondary:hover {
+      background: #F1F5F9;
+      color: #0F172A;
+    }
+
+    .btn-admin-danger {
+      background: #FEE2E2;
+      color: #DC2626;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid #FECACA;
+      cursor: pointer;
+    }
+
+    .btn-admin-danger:hover {
+      background: #FCA5A5;
+    }
+
+    /* Banners Grid */
+    .banners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 20px;
+    }
+
+    .banner-admin-card {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .banner-card-preview {
+      position: relative;
+      height: 180px;
+      background: #FAFAFA;
+      overflow: hidden;
+    }
+
+    .banner-card-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .banner-card-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      color: #FFFFFF;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .banner-card-content {
+      padding: 16px 20px;
+      flex: 1;
+    }
+
+    .banner-card-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0 0 6px;
+      color: #0F172A;
+    }
+
+    .banner-card-subtext {
+      font-size: 13px;
+      color: #64748B;
+      line-height: 1.4;
+      margin: 0 0 16px;
+    }
+
+    .banner-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+      background: #F8FAFC;
+      border-top: 1px solid var(--admin-border);
+    }
+
+    /* Products Table / Cards */
+    .products-admin-table-wrap {
+      background: #FFFFFF;
+      border: 1px solid var(--admin-border);
+      border-radius: 12px;
+      overflow-x: auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    table.admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    table.admin-table th {
+      background: #F8FAFC;
+      padding: 12px 18px;
+      font-weight: 700;
+      color: #475569;
+      border-bottom: 1px solid var(--admin-border);
+      white-space: nowrap;
+    }
+
+    table.admin-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--admin-border);
+      vertical-align: middle;
+    }
+
+    .prod-thumb-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .prod-thumb-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--admin-border);
+    }
+
+    .badge-pill-admin {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .badge-pill-orange {
+      background: #FFF7ED;
+      color: #C2410C;
+    }
+
+    .badge-pill-green {
+      background: #ECFDF5;
+      color: #047857;
+    }
+
+    .badge-pill-red {
+      background: #FEF2F2;
+      color: #B91C1C;
+    }
+
+    /* Modal Styling */
+    .admin-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .admin-modal-overlay.open {
+      display: flex;
+    }
+
+    .admin-modal-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .admin-modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--admin-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-modal-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0;
+      color: #0F172A;
+    }
+
+    .admin-modal-close {
+      background: transparent;
+      border: none;
+      font-size: 22px;
+      color: #64748B;
+      cursor: pointer;
+    }
+
+    .admin-modal-body {
+      padding: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 14px;
+      border: 1px solid var(--admin-border);
+      border-radius: 8px;
+      font-size: 14px;
+      color: #0F172A;
+      background: #FFFFFF;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--admin-brand);
+      box-shadow: 0 0 0 3px rgba(255, 160, 0, 0.15);
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .preset-images-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .preset-img-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      border: 2px solid var(--admin-border);
+      overflow: hidden;
+      cursor: pointer;
+      padding: 0;
+      background: none;
+    }
+
+    .preset-img-btn.selected {
+      border-color: var(--admin-brand);
+      box-shadow: 0 0 0 2px var(--admin-brand);
+    }
+
+    .preset-img-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .color-swatches-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .color-swatch-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 0 0 1px #CBD5E1;
+      cursor: pointer;
+    }
+
+    .color-swatch-btn.selected {
+      box-shadow: 0 0 0 3px #0F172A;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Admin Top Bar -->
+  <header class="admin-header">
+    <div class="container admin-header-row">
+      <a href="index.html" class="admin-brand">
+        <div class="admin-brand-icon">🍯</div>
+        <div>
+          <div style="font-weight: 800; font-size: 16px; letter-spacing: -0.3px;">HALWA HAWELI</div>
+          <div style="font-size: 11px; color: #94A3B8; text-transform: uppercase;">Store Management Console</div>
+        </div>
+      </a>
+
+      <!-- Tab Switchers -->
+      <div class="admin-nav-tabs">
+        <button type="button" class="admin-tab-btn active" onclick="switchAdminTab('banners', this)">
+          <span>🖼️</span> Hero Banners
+        </button>
+        <button type="button" class="admin-tab-btn" onclick="switchAdminTab('products', this)">
+          <span>🍯</span> Products & Pricing
+        </button>
+        <button type="button" class="admin-tab-btn" onclick="switchAdminTab('orders', this)">
+          <span>📦</span> Live Orders
+        </button>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <a href="index.html" target="_blank" class="btn-admin-secondary" style="color: #FFFFFF; background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2);">
+          <span>👁️ View Store</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main-wrap">
+
+    <!-- ==========================================
+         TAB 1: HERO BANNERS MANAGEMENT
+         ========================================== -->
+    <section id="tab-banners" class="admin-tab-content">
+      <div class="admin-section-header">
+        <div>
+          <h1 class="admin-section-title">Header Hero Banners</h1>
+          <p class="admin-section-desc">Add, customize, and manage sliding banners displayed at the top of the storefront homepage.</p>
+        </div>
+        <button type="button" class="btn-admin-primary" onclick="openAddBannerModal()">
+          <span>+ Add New Banner</span>
+        </button>
+      </div>
+
+      <div class="banners-grid" id="admin-banners-grid">
+        <!-- Injected via JavaScript -->
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 2: PRODUCTS & PRICING MANAGEMENT
+         ========================================== -->
+    <section id="tab-products" class="admin-tab-content" style="display: none;">
+      <div class="admin-section-header">
+        <div>
+          <h1 class="admin-section-title">Halwa Varieties & Prices</h1>
+          <p class="admin-section-desc">Manage products, update selling prices for each weight tier (200g, 500g, 1kg), discount pills, and stock availability.</p>
+        </div>
+        <button type="button" class="btn-admin-primary" onclick="openAddProductModal()">
+          <span>+ Add New Halwa Product</span>
+        </button>
+      </div>
+
+      <div class="products-admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Halwa Variety</th>
+              <th>Category</th>
+              <th>Discount Pill</th>
+              <th>Weight Variants & Prices</th>
+              <th>Stock Status</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-products-tbody">
+            <!-- Injected via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         TAB 3: LIVE ORDERS MANAGEMENT
+         ========================================== -->
+    <section id="tab-orders" class="admin-tab-content" style="display: none;">
+      <div class="admin-section-header">
+        <div>
+          <h1 class="admin-section-title">Kitchen & Customer Orders</h1>
+          <p class="admin-section-desc">Track real-time orders, preparation progress, and dispatch to customers.</p>
+        </div>
+        <button type="button" class="btn-admin-secondary" onclick="loadAdminOrders()">
+          <span>🔄 Refresh Orders</span>
+        </button>
+      </div>
+
+      <!-- KPI Overview Cards -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 24px;">
+        <div style="background: #FFFFFF; border: 1px solid var(--admin-border); border-radius: 12px; padding: 18px;">
+          <div style="font-size: 12px; font-weight: 700; color: #64748B; text-transform: uppercase;">Total Orders</div>
+          <div style="font-size: 28px; font-weight: 800; color: #0F172A; margin-top: 4px;" id="stat-total-orders">0</div>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid var(--admin-border); border-radius: 12px; padding: 18px;">
+          <div style="font-size: 12px; font-weight: 700; color: #D97706; text-transform: uppercase;">Preparing Fresh</div>
+          <div style="font-size: 28px; font-weight: 800; color: #D97706; margin-top: 4px;" id="stat-active-cooking">0</div>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid var(--admin-border); border-radius: 12px; padding: 18px;">
+          <div style="font-size: 12px; font-weight: 700; color: #059669; text-transform: uppercase;">Dispatched / Out</div>
+          <div style="font-size: 28px; font-weight: 800; color: #059669; margin-top: 4px;" id="stat-out-delivery">0</div>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid var(--admin-border); border-radius: 12px; padding: 18px;">
+          <div style="font-size: 12px; font-weight: 700; color: #64748B; text-transform: uppercase;">Total Revenue</div>
+          <div style="font-size: 28px; font-weight: 800; color: #0F172A; margin-top: 4px;" id="stat-revenue">Rs. 0.00</div>
+        </div>
+      </div>
+
+      <div class="products-admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Items</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th style="text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="admin-orders-tbody">
+            <!-- Injected via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       MODAL: ADD / EDIT BANNER
+       ========================================== -->
+  <div class="admin-modal-overlay" id="banner-modal">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="banner-modal-title">Add Hero Banner</h3>
+        <button type="button" class="admin-modal-close" onclick="closeBannerModal()">✕</button>
+      </div>
+      <div class="admin-modal-body">
+        <form id="banner-form" onsubmit="handleSaveBanner(event)">
+          <input type="hidden" id="banner-id">
+
+          <div class="form-group">
+            <label class="form-label">Tag Badge Text</label>
+            <input type="text" id="banner-tag" class="form-input" placeholder="e.g. 🔥 55% OFF • FESTIVE SALE" required>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Main Heading</label>
+              <input type="text" id="banner-title" class="form-input" placeholder="e.g. Authentic Kozhikode" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Highlight Word / Phrase</label>
+              <input type="text" id="banner-highlight" class="form-input" placeholder="e.g. Kerala Halwa" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Subtext / Description</label>
+            <textarea id="banner-subtext" class="form-textarea" rows="2" placeholder="Slow-simmered in pure coconut oil and fresh cashews." required></textarea>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">CTA Button Label</label>
+              <input type="text" id="banner-cta-text" class="form-input" placeholder="e.g. Shop Dates & Black Halwa" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">CTA Target Link</label>
+              <input type="text" id="banner-cta-link" class="form-input" placeholder="#single-varieties" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Banner Image</label>
+            <input type="text" id="banner-image" class="form-input" placeholder="assets/images/omani_halwa.jpg" required>
+            <div class="preset-images-row">
+              <button type="button" class="preset-img-btn" onclick="selectPresetBannerImage('assets/images/omani_halwa.jpg', this)"><img src="assets/images/omani_halwa.jpg" alt="Black Halwa"></button>
+              <button type="button" class="preset-img-btn" onclick="selectPresetBannerImage('assets/images/gajar_halwa.jpg', this)"><img src="assets/images/gajar_halwa.jpg" alt="Dates Halwa"></button>
+              <button type="button" class="preset-img-btn" onclick="selectPresetBannerImage('assets/images/gift_box.jpg', this)"><img src="assets/images/gift_box.jpg" alt="Gift Box"></button>
+              <button type="button" class="preset-img-btn" onclick="selectPresetBannerImage('assets/images/sooji_halwa.jpg', this)"><img src="assets/images/sooji_halwa.jpg" alt="Jackfruit"></button>
+              <button type="button" class="preset-img-btn" onclick="selectPresetBannerImage('assets/images/karachi_halwa.jpg', this)"><img src="assets/images/karachi_halwa.jpg" alt="Fruit & Nut"></button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Theme Accent Color</label>
+            <input type="hidden" id="banner-theme-color" value="#FFA000">
+            <div class="color-swatches-row">
+              <button type="button" class="color-swatch-btn selected" style="background: #FFA000;" onclick="selectBannerColor('#FFA000', this)"></button>
+              <button type="button" class="color-swatch-btn" style="background: #7C3AED;" onclick="selectBannerColor('#7C3AED', this)"></button>
+              <button type="button" class="color-swatch-btn" style="background: #059669;" onclick="selectBannerColor('#059669', this)"></button>
+              <button type="button" class="color-swatch-btn" style="background: #DC2626;" onclick="selectBannerColor('#DC2626', this)"></button>
+              <button type="button" class="color-swatch-btn" style="background: #2563EB;" onclick="selectBannerColor('#2563EB', this)"></button>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+            <button type="button" class="btn-admin-secondary" onclick="closeBannerModal()">Cancel</button>
+            <button type="submit" class="btn-admin-primary">Save Hero Banner</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL: ADD / EDIT PRODUCT & PRICES
+       ========================================== -->
+  <div class="admin-modal-overlay" id="product-modal">
+    <div class="admin-modal-card">
+      <div class="admin-modal-header">
+        <h3 class="admin-modal-title" id="product-modal-title">Add / Edit Halwa Product</h3>
+        <button type="button" class="admin-modal-close" onclick="closeProductModal()">✕</button>
+      </div>
+      <div class="admin-modal-body">
+        <form id="product-form" onsubmit="handleSaveProduct(event)">
+          <input type="hidden" id="prod-id">
+
+          <div class="form-group">
+            <label class="form-label">Product Name</label>
+            <input type="text" id="prod-name" class="form-input" placeholder="e.g. Dates Halwa - Authentic, Kerala Halwa" required>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select id="prod-category" class="form-select">
+                <option value="single">Single Varieties</option>
+                <option value="fruit">Fruit Halwa</option>
+                <option value="combo">Combo Box</option>
+                <option value="special">Special Deals</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Discount Badge Text</label>
+              <input type="text" id="prod-discount" class="form-input" placeholder="e.g. 55.06% OFF" required>
+            </div>
+          </div>
+
+          <div style="background: #F8FAFC; border: 1px solid var(--admin-border); border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+            <div style="font-size: 13px; font-weight: 800; color: #1E293B; margin-bottom: 10px;">Tiered Weight Variants & Prices (Rs.)</div>
+            
+            <!-- 200g -->
+            <div class="form-row-2" style="margin-bottom: 8px;">
+              <div>
+                <label class="form-label" style="font-size: 11px;">200 g Selling Price (Rs.)</label>
+                <input type="number" id="prod-p200" class="form-input" placeholder="299" required>
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 11px;">200 g Original Price (Rs.)</label>
+                <input type="number" id="prod-orig200" class="form-input" placeholder="599" required>
+              </div>
+            </div>
+
+            <!-- 500g -->
+            <div class="form-row-2" style="margin-bottom: 8px;">
+              <div>
+                <label class="form-label" style="font-size: 11px;">500 g Selling Price (Rs.)</label>
+                <input type="number" id="prod-p500" class="form-input" placeholder="549" required>
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 11px;">500 g Original Price (Rs.)</label>
+                <input type="number" id="prod-orig500" class="form-input" placeholder="999" required>
+              </div>
+            </div>
+
+            <!-- 1kg -->
+            <div class="form-row-2">
+              <div>
+                <label class="form-label" style="font-size: 11px;">1 kg Selling Price (Rs.)</label>
+                <input type="number" id="prod-p1k" class="form-input" placeholder="999" required>
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 11px;">1 kg Original Price (Rs.)</label>
+                <input type="number" id="prod-orig1k" class="form-input" placeholder="1899" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Product Image</label>
+            <input type="text" id="prod-image" class="form-input" placeholder="assets/images/gajar_halwa.jpg" required>
+            <div class="preset-images-row">
+              <button type="button" class="preset-img-btn" onclick="selectPresetProductImage('assets/images/gajar_halwa.jpg', this)"><img src="assets/images/gajar_halwa.jpg" alt="Dates"></button>
+              <button type="button" class="preset-img-btn" onclick="selectPresetProductImage('assets/images/omani_halwa.jpg', this)"><img src="assets/images/omani_halwa.jpg" alt="Black"></button>
+              <button type="button" class="preset-img-btn" onclick="selectPresetProductImage('assets/images/sooji_halwa.jpg', this)"><img src="assets/images/sooji_halwa.jpg" alt="Jackfruit"></button>
+              <button type="button" class="preset-img-btn" onclick="selectPresetProductImage('assets/images/karachi_halwa.jpg', this)"><img src="assets/images/karachi_halwa.jpg" alt="Fruit & Nut"></button>
+              <button type="button" class="preset-img-btn" onclick="selectPresetProductImage('assets/images/gift_box.jpg', this)"><img src="assets/images/gift_box.jpg" alt="Heritage Box"></button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; cursor: pointer;">
+              <input type="checkbox" id="prod-sold-out">
+              <span>Mark as Sold Out (Unavailable for ordering)</span>
+            </label>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+            <button type="button" class="btn-admin-secondary" onclick="closeProductModal()">Cancel</button>
+            <button type="submit" class="btn-admin-primary">Save Product & Prices</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    function switchAdminTab(tabName, btn) {
+      document.querySelectorAll('.admin-tab-content').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+      
+      const target = document.getElementById(`tab-${tabName}`);
+      if (target) target.style.display = 'block';
+      if (btn) btn.classList.add('active');
+
+      if (tabName === 'banners') renderAdminBanners();
+      if (tabName === 'products') renderAdminProducts();
+      if (tabName === 'orders') loadAdminOrders();
+    }
+
+    // ==========================================
+    // BANNERS ADMIN CONTROLS
+    // ==========================================
+    function renderAdminBanners() {
+      const grid = document.getElementById('admin-banners-grid');
+      if (!grid) return;
+
+      const banners = window.haweliApp.getBanners();
+      grid.innerHTML = banners.map(b => `
+        <div class="banner-admin-card">
+          <div class="banner-card-preview">
+            <span class="banner-card-tag" style="background: ${b.theme_color || '#FFA000'};">${b.tag}</span>
+            <img src="${b.image}" alt="${b.title}">
+          </div>
+          <div class="banner-card-content">
+            <h3 class="banner-card-title">${b.title} <span style="color: ${b.theme_color || '#FFA000'};">${b.highlight || ''}</span></h3>
+            <p class="banner-card-subtext">${b.subtext}</p>
+            <div style="font-size: 12px; color: #475569;">
+              <div>Button: <strong>${b.cta_text}</strong></div>
+              <div>Link: <code>${b.cta_link}</code></div>
+            </div>
+          </div>
+          <div class="banner-card-footer">
+            <span class="badge-pill-admin ${b.active !== false ? 'badge-pill-green' : 'badge-pill-red'}">
+              ${b.active !== false ? 'Active on Storefront' : 'Inactive'}
+            </span>
+            <div style="display: flex; gap: 8px;">
+              <button type="button" class="btn-admin-secondary" onclick="openEditBannerModal('${b.id}')">Edit</button>
+              <button type="button" class="btn-admin-danger" onclick="deleteBanner('${b.id}')">Delete</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openAddBannerModal() {
+      document.getElementById('banner-modal-title').textContent = 'Add Hero Banner';
+      document.getElementById('banner-id').value = '';
+      document.getElementById('banner-tag').value = '🔥 50% OFF • SPECIAL OFFER';
+      document.getElementById('banner-title').value = 'Authentic Kerala';
+      document.getElementById('banner-highlight').value = 'Halwa Delights';
+      document.getElementById('banner-subtext').value = 'Slow-simmered in pure coconut oil and fresh cashews.';
+      document.getElementById('banner-cta-text').value = 'Order Now';
+      document.getElementById('banner-cta-link').value = '#single-varieties';
+      document.getElementById('banner-image').value = 'assets/images/omani_halwa.jpg';
+      selectBannerColor('#FFA000', document.querySelector('.color-swatch-btn'));
+      document.getElementById('banner-modal').classList.add('open');
+    }
+
+    function openEditBannerModal(id) {
+      const banners = window.haweliApp.getBanners();
+      const b = banners.find(item => item.id === id);
+      if (!b) return;
+
+      document.getElementById('banner-modal-title').textContent = 'Edit Hero Banner';
+      document.getElementById('banner-id').value = b.id;
+      document.getElementById('banner-tag').value = b.tag || '';
+      document.getElementById('banner-title').value = b.title || '';
+      document.getElementById('banner-highlight').value = b.highlight || '';
+      document.getElementById('banner-subtext').value = b.subtext || '';
+      document.getElementById('banner-cta-text').value = b.cta_text || '';
+      document.getElementById('banner-cta-link').value = b.cta_link || '';
+      document.getElementById('banner-image').value = b.image || '';
+      selectBannerColor(b.theme_color || '#FFA000');
+      document.getElementById('banner-modal').classList.add('open');
+    }
+
+    function closeBannerModal() {
+      document.getElementById('banner-modal').classList.remove('open');
+    }
+
+    function selectPresetBannerImage(url, btn) {
+      document.getElementById('banner-image').value = url;
+      document.querySelectorAll('.preset-img-btn').forEach(b => b.classList.remove('selected'));
+      if (btn) btn.classList.add('selected');
+    }
+
+    function selectBannerColor(color, btn) {
+      document.getElementById('banner-theme-color').value = color;
+      document.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('selected'));
+      if (btn) btn.classList.add('selected');
+    }
+
+    async function handleSaveBanner(e) {
+      e.preventDefault();
+      const id = document.getElementById('banner-id').value.trim();
+      const bannerData = {
+        id: id || undefined,
+        tag: document.getElementById('banner-tag').value.trim(),
+        title: document.getElementById('banner-title').value.trim(),
+        highlight: document.getElementById('banner-highlight').value.trim(),
+        subtext: document.getElementById('banner-subtext').value.trim(),
+        cta_text: document.getElementById('banner-cta-text').value.trim(),
+        cta_link: document.getElementById('banner-cta-link').value.trim(),
+        image: document.getElementById('banner-image').value.trim(),
+        theme_color: document.getElementById('banner-theme-color').value,
+        active: true
+      };
+
+      await window.haweliApp.saveBanner(bannerData);
+      closeBannerModal();
+      renderAdminBanners();
+      alert('Hero banner saved successfully! The storefront carousel has been updated.');
+    }
+
+    async function deleteBanner(id) {
+      if (!confirm('Are you sure you want to delete this hero banner?')) return;
+      await window.haweliApp.deleteBanner(id);
+      renderAdminBanners();
+    }
+
+    // ==========================================
+    // PRODUCTS ADMIN CONTROLS
+    // ==========================================
+    function renderAdminProducts() {
+      const tbody = document.getElementById('admin-products-tbody');
+      if (!tbody) return;
+
+      const products = window.haweliApp.getProducts();
+      tbody.innerHTML = products.map(p => {
+        const weightsHtml = (p.weights || []).map(w => `
+          <span style="display: inline-block; background: #F1F5F9; border: 1px solid #E2E8F0; padding: 2px 8px; border-radius: 6px; font-size: 12px; margin-right: 4px;">
+            <strong>${w.size}</strong>: Rs. ${w.price} <s style="color: #94A3B8; font-size: 11px;">Rs. ${w.orig || (w.price * 2)}</s>
+          </span>
+        `).join('');
+
+        return `
+          <tr>
+            <td>
+              <div class="prod-thumb-cell">
+                <img src="${p.image}" alt="${p.name}" class="prod-thumb-img">
+                <div>
+                  <div style="font-weight: 700; color: #0F172A;">${p.name}</div>
+                  <div style="font-size: 12px; color: #64748B;">Base: From Rs. ${p.base_price}.00</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="badge-pill-admin badge-pill-orange" style="text-transform: capitalize;">${p.category || 'single'}</span>
+            </td>
+            <td>
+              <span class="badge-pill-admin badge-pill-orange">${p.discount_badge || '50% OFF'}</span>
+            </td>
+            <td>
+              <div style="display: flex; flex-wrap: wrap; gap: 4px;">${weightsHtml}</div>
+            </td>
+            <td>
+              <span class="badge-pill-admin ${p.is_sold_out ? 'badge-pill-red' : 'badge-pill-green'}">
+                ${p.is_sold_out ? 'Sold out' : 'In Stock'}
+              </span>
+            </td>
+            <td style="text-align: right; white-space: nowrap;">
+              <button type="button" class="btn-admin-secondary" onclick="openEditProductModal('${p.id}')">Edit Prices</button>
+              <button type="button" class="btn-admin-danger" onclick="deleteProduct('${p.id}')">Delete</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function openAddProductModal() {
+      document.getElementById('product-modal-title').textContent = 'Add New Halwa Product';
+      document.getElementById('prod-id').value = '';
+      document.getElementById('prod-name').value = '';
+      document.getElementById('prod-category').value = 'single';
+      document.getElementById('prod-discount').value = '50.00% OFF';
+      document.getElementById('prod-p200').value = '299';
+      document.getElementById('prod-orig200').value = '599';
+      document.getElementById('prod-p500').value = '549';
+      document.getElementById('prod-orig500').value = '999';
+      document.getElementById('prod-p1k').value = '999';
+      document.getElementById('prod-orig1k').value = '1899';
+      document.getElementById('prod-image').value = 'assets/images/gajar_halwa.jpg';
+      document.getElementById('prod-sold-out').checked = false;
+      document.getElementById('product-modal').classList.add('open');
+    }
+
+    function openEditProductModal(id) {
+      const products = window.haweliApp.getProducts();
+      const p = products.find(item => item.id === id);
+      if (!p) return;
+
+      document.getElementById('product-modal-title').textContent = 'Edit Halwa & Prices';
+      document.getElementById('prod-id').value = p.id;
+      document.getElementById('prod-name').value = p.name || '';
+      document.getElementById('prod-category').value = p.category || 'single';
+      document.getElementById('prod-discount').value = p.discount_badge || '50.00% OFF';
+
+      const w200 = p.weights ? p.weights.find(w => w.size === '200 g') : null;
+      const w500 = p.weights ? p.weights.find(w => w.size === '500 g') : null;
+      const w1k = p.weights ? p.weights.find(w => w.size === '1 kg') : null;
+
+      document.getElementById('prod-p200').value = w200 ? w200.price : (p.base_price || 299);
+      document.getElementById('prod-orig200').value = w200 ? (w200.orig || w200.orig_price || 599) : (p.original_price || 599);
+      
+      document.getElementById('prod-p500').value = w500 ? w500.price : 549;
+      document.getElementById('prod-orig500').value = w500 ? (w500.orig || w500.orig_price || 999) : 999;
+
+      document.getElementById('prod-p1k').value = w1k ? w1k.price : 999;
+      document.getElementById('prod-orig1k').value = w1k ? (w1k.orig || w1k.orig_price || 1899) : 1899;
+
+      document.getElementById('prod-image').value = p.image || '';
+      document.getElementById('prod-sold-out').checked = !!p.is_sold_out;
+      document.getElementById('product-modal').classList.add('open');
+    }
+
+    function closeProductModal() {
+      document.getElementById('product-modal').classList.remove('open');
+    }
+
+    function selectPresetProductImage(url, btn) {
+      document.getElementById('prod-image').value = url;
+      document.querySelectorAll('.preset-img-btn').forEach(b => b.classList.remove('selected'));
+      if (btn) btn.classList.add('selected');
+    }
+
+    async function handleSaveProduct(e) {
+      e.preventDefault();
+      const id = document.getElementById('prod-id').value.trim();
+      const p200 = parseFloat(document.getElementById('prod-p200').value) || 299;
+      const orig200 = parseFloat(document.getElementById('prod-orig200').value) || 599;
+      const p500 = parseFloat(document.getElementById('prod-p500').value) || 549;
+      const orig500 = parseFloat(document.getElementById('prod-orig500').value) || 999;
+      const p1k = parseFloat(document.getElementById('prod-p1k').value) || 999;
+      const orig1k = parseFloat(document.getElementById('prod-orig1k').value) || 1899;
+
+      const productData = {
+        id: id || undefined,
+        name: document.getElementById('prod-name').value.trim(),
+        category: document.getElementById('prod-category').value,
+        discount_badge: document.getElementById('prod-discount').value.trim(),
+        badge_type: 'Sale',
+        base_price: p200,
+        original_price: orig200,
+        image: document.getElementById('prod-image').value.trim(),
+        is_sold_out: document.getElementById('prod-sold-out').checked,
+        weights: [
+          { size: "200 g", price: p200, orig: orig200 },
+          { size: "500 g", price: p500, orig: orig500 },
+          { size: "1 kg", price: p1k, orig: orig1k }
+        ]
+      };
+
+      await window.haweliApp.saveProduct(productData);
+      closeProductModal();
+      renderAdminProducts();
+      alert('Product and tiered prices saved successfully! The storefront catalog is updated.');
+    }
+
+    async function deleteProduct(id) {
+      if (!confirm('Are you sure you want to delete this product?')) return;
+      await window.haweliApp.deleteProduct(id);
+      renderAdminProducts();
+    }
+
+    // ==========================================
+    // ORDERS ADMIN CONTROLS
+    // ==========================================
+    async function loadAdminOrders() {
+      let orders = [];
+      try {
+        const res = await fetch('backend/api.php?action=admin_orders');
+        const data = await res.json();
+        if (data.success) orders = data.data;
+      } catch (e) {}
+
+      if (orders.length === 0) {
+        const local = JSON.parse(localStorage.getItem('zaika_local_orders') || '[]');
+        orders = local.length > 0 ? local : [
+          {
+            order_id: "HH-8842",
+            customer: { name: "Hamza Farooqi", phone: "+91 9876543210", address: "Kozhikode, Kerala" },
+            items: [{ name: "Dates Halwa - Authentic, Kerala Halwa", size: "200 g", quantity: 2, price: 299 }],
+            total: 598.00,
+            status: "cooking"
+          }
+        ];
+      }
+
+      document.getElementById('stat-total-orders').textContent = orders.length;
+      document.getElementById('stat-active-cooking').textContent = orders.filter(o => o.status === 'cooking' || o.status === 'received').length;
+      document.getElementById('stat-out-delivery').textContent = orders.filter(o => o.status === 'out_for_delivery').length;
+      const rev = orders.reduce((sum, o) => sum + (parseFloat(o.total) || 0), 0);
+      document.getElementById('stat-revenue').textContent = 'Rs. ' + rev.toFixed(2);
+
+      const tbody = document.getElementById('admin-orders-tbody');
+      tbody.innerHTML = orders.map(o => `
+        <tr>
+          <td>
+            <strong style="color: #0F172A; font-weight: 800;">${o.order_id}</strong>
+          </td>
+          <td>
+            <strong>${o.customer.name}</strong><br>
+            <span style="color: #64748B; font-size: 12px;">${o.customer.phone} • ${o.customer.address || ''}</span>
+          </td>
+          <td>
+            ${o.items.map(i => `<div style="font-size: 13px;">• ${i.quantity}x ${i.name} <span style="color: #64748B;">(${i.size})</span></div>`).join('')}
+          </td>
+          <td>
+            <strong style="color: #0F172A;">Rs. ${parseFloat(o.total).toFixed(2)}</strong>
+          </td>
+          <td>
+            <select class="form-select" style="padding: 4px 8px; font-size: 12px; font-weight: 700;" onchange="updateOrderStatus('${o.order_id}', this.value)">
+              <option value="received" ${o.status === 'received' ? 'selected' : ''}>Received</option>
+              <option value="cooking" ${o.status === 'cooking' ? 'selected' : ''}>Cooking Fresh</option>
+              <option value="packed" ${o.status === 'packed' ? 'selected' : ''}>Packed</option>
+              <option value="out_for_delivery" ${o.status === 'out_for_delivery' ? 'selected' : ''}>Out for Delivery</option>
+              <option value="delivered" ${o.status === 'delivered' ? 'selected' : ''}>Delivered</option>
+            </select>
+          </td>
+          <td style="text-align: right;">
+            <a href="https://wa.me/${(o.customer.phone || '').replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(o.customer.name)},%20your%20Halwa%20Haweli%20order%20${o.order_id}%20status%20is%20updated!" target="_blank" class="btn-admin-secondary" style="font-size: 11px;">
+              💬 WhatsApp
+            </a>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function updateOrderStatus(orderId, newStatus) {
+      try {
+        await fetch('backend/api.php?action=update_order_status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ order_id: orderId, status: newStatus })
+        });
+      } catch (e) {}
+
+      const local = JSON.parse(localStorage.getItem('zaika_local_orders') || '[]');
+      const target = local.find(o => o.order_id === orderId);
+      if (target) {
+        target.status = newStatus;
+        localStorage.setItem('zaika_local_orders', JSON.stringify(local));
+      }
+      loadAdminOrders();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAdminBanners();
+      renderAdminProducts();
+      loadAdminOrders();
+    });
+  </script>
+</body>
+</html>
